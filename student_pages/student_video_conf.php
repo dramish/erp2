@@ -290,11 +290,11 @@ $result = mysqli_query($con,"SELECT tid, subjcode, rollno from coursedetails, lo
 while($row = mysqli_fetch_array($result)) {
   $name = $row['tid'];
   $rollno=$row['rollno'];
-  $s = $row['subjcode'];
+  $sub = $row['subjcode'];
 
   $sql="SELECT subject.subjcode, subject.subjname, login_faculty.tname, login_faculty.meeting_url
           from login_faculty, subject
-          WHERE login_faculty.id = subject.tid AND subject.subjcode='$s' AND login_faculty.id=?";
+          WHERE login_faculty.id = subject.tid AND subject.subjcode='$sub' AND login_faculty.id=?";
 
   $stmt=$con->prepare( $sql );
   $stmt->bind_param( 's', $name );
