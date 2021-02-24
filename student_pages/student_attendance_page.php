@@ -261,12 +261,13 @@ while($ri = mysqli_fetch_array($i)) {
 
 //login_faculty.tname FROM ((login_student INNER JOIN coursedetails ON login_student.branch = coursedetails.branch AND login_student.program = coursedetails.program AND login_student.semester = coursedetails.semester) INNER JOIN login_faculty ON login_faculty.id = coursedetails.tid)
 
-  $result = mysqli_query($con,"SELECT tid from coursedetails, login_student WHERE login_student.branch = coursedetails.branch AND login_student.program = coursedetails.program AND login_student.semester = coursedetails.semester AND login_student.email='$sId'") or die('Error1');
+  $result = mysqli_query($con,"SELECT tid, subjcode from coursedetails, login_student WHERE login_student.branch = coursedetails.branch AND login_student.program = coursedetails.program AND login_student.semester = coursedetails.semester AND login_student.email='$sId'") or die('Error1');
 
 while($row = mysqli_fetch_array($result)) {
   $name = $row['tid'];
+  $s = $row['subjcode'];
 
-  $r = mysqli_query($con, "SELECT subject.subjcode, subject.subjname, attendance.attendno from attendance, subject WHERE attendance.tid = subject.tid AND attendance.tid='$name' AND attendance.rollno='$rollNo'") or die('Error2');
+  $r = mysqli_query($con, "SELECT subject.subjcode, subject.subjname, attendance.attendno from attendance, subject WHERE attendance.tid = subject.tid AND attendance.tid='$name' AND subject.subjcode='$s' AND attendance.rollno='$rollNo'") or die('Error2');
 
   while($ro = mysqli_fetch_array($r)){
     $a1 = $ro['subjcode'];
