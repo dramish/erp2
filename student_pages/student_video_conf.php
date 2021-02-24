@@ -286,14 +286,15 @@ function myFunction() {
 
 $sId=$_SESSION['email'];
 
-$result = mysqli_query($con,"SELECT tid, rollno from coursedetails, login_student WHERE login_student.branch = coursedetails.branch AND login_student.program = coursedetails.program AND login_student.semester = coursedetails.semester AND login_student.email='$sId'") or die('Error');
+$result = mysqli_query($con,"SELECT tid, subjcode, rollno from coursedetails, login_student WHERE login_student.branch = coursedetails.branch AND login_student.program = coursedetails.program AND login_student.semester = coursedetails.semester AND login_student.email='$sId'") or die('Error');
 while($row = mysqli_fetch_array($result)) {
   $name = $row['tid'];
   $rollno=$row['rollno'];
+  $s = $row['subjcode'];
 
-  $sql='SELECT subject.subjcode, subject.subjname, login_faculty.tname, login_faculty.meeting_url
+  $sql="SELECT subject.subjcode, subject.subjname, login_faculty.tname, login_faculty.meeting_url
           from login_faculty, subject
-          WHERE login_faculty.id = subject.tid AND login_faculty.id=?';
+          WHERE login_faculty.id = subject.tid AND subject.subjcode='$s' AND login_faculty.id=?";
 
   $stmt=$con->prepare( $sql );
   $stmt->bind_param( 's', $name );
