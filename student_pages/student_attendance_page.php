@@ -265,9 +265,9 @@ while($ri = mysqli_fetch_array($i)) {
 
 while($row = mysqli_fetch_array($result)) {
   $name = $row['tid'];
-  $s = $row['subjcode'];
+  $sub = $row['subjcode'];
 
-  $r = mysqli_query($con, "SELECT subject.subjcode, subject.subjname, attendance.attendno from attendance, subject WHERE attendance.tid = subject.tid AND attendance.tid='$name' AND subject.subjcode='$s' AND attendance.rollno='$rollNo'") or die('Error2');
+  $r = mysqli_query($con, "SELECT subject.subjcode, subject.subjname, attendance.attendno from attendance, subject WHERE attendance.tid = subject.tid AND attendance.tid='$name' AND subject.subjcode='$sub' AND attendance.rollno='$rollNo'") or die('Error2');
 
   while($ro = mysqli_fetch_array($r)){
     $a1 = $ro['subjcode'];
