@@ -225,6 +225,7 @@ function myFunction() {
     <th>Total Marks</th>
     <th>Time Limit(per question)</th>
     <th>Take Test</th>  
+    <th>Test Key</th>
   </tr>
     <?php
   $result = mysqli_query($con,"SELECT * FROM quiz as q inner join coursedetails as c on q.teacher_id=c.tid and q.subjcode=c.subjcode where c.program='$p' and c.branch='$br' and c.semester='$s'  ORDER BY date DESC") or die('Error');
@@ -241,9 +242,11 @@ while($row = mysqli_fetch_array($result)) {
   $in=$row['intro'];
   $eid=$row['quizid'];
   $da=$row['date'];
+  $tk=$row['duplicateTestKey'];
   //$attemp="idk";
   echo '<tr><td>'.$c++.'</td><td>'.$sc.'</td><td>'.$sn.'</td><td>'.$tn.'</td><td>'.$da.'</td><td>'.$tq.'</td><td>'.$cor.'</td><td>'.$wro.'</td><td>'.$tm.'</td><td>'.$tl.' seconds </td>
-  <td><a title="Take Test" href="taketest1.php?tid='.$eid.'&corr='.$cor.'&wron='.$wro.'&tq='.$tq.'&tn='.$sn.'&d='.$in.'"><i>Take Test</i></a></td></tr> ';
+  <td><a title="Take Test" href="taketest1.php?tid='.$eid.'&corr='.$cor.'&wron='.$wro.'&tq='.$tq.'&tn='.$sn.'&d='.$in.'"><i>Take Test</i></a></td></tr>
+  <td><i>'.$tk.'</i></td></tr> ';
 }
 $c=0;
 echo '</table></div>';

@@ -14,6 +14,7 @@ if(@$_GET['tname'] )
 $var=$_GET['tid'];
 
 $r2 = mysqli_query($con,"UPDATE quiz SET testkey='closed' WHERE  quizid = '$var' ") or die('Error2');
+$r2 = mysqli_query($con,"UPDATE quiz SET duplicateTestKey='You are late!' WHERE  quizid = '$var' ") or die('Error2');
 //echo "s5";
 header("location:viewtest.php");
 //echo "s6";
