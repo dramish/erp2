@@ -16,7 +16,7 @@ if($_SESSION['xy']=='')
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-     
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -24,9 +24,9 @@ body {
   position: relative;
   padding: 20px;
   background: white;
-  color: #21610B;  
+  color: #21610B;
   font-size: 15px;
-  
+
 }
 
 p{
@@ -63,7 +63,7 @@ font-size:25px;
 .manageuser{
 			font-family: "Times New Roman", Times, serif;
       font-size: 20px;
-      
+
 		}
   table {
   font-family: arial, sans-serif;
@@ -89,12 +89,12 @@ th {
 }
 .content {
   flex: 1 0 auto;
-}  
+}
 .navbar .icon {
   display: none;
 }
 @media (max-width: 576px) {
-  
+
   .header{
     font-size:8px;
   }
@@ -151,13 +151,13 @@ th {
     <img src="IGDTUW-logo.png" alt="logo" />
     <h1>INDIRA GANDHI DELHI TECHNICAL UNIVERSITY FOR WOMEN</h1>
     <p>(Established by Govt. of Delhi vide Act 9 of 2012)</p>
-  </div> 
-  
-  
+  </div>
+
+
    <div class="navbar" id="myTopnav">
     <a class="active" href="module_page.php"><i class="fa fa-file-text" aria-hidden="true"></i> Module</a>
-    <a href="learning_homepage.php"><i class="fa fa-user  fa-home"></i> Home</a>      
-    <a href="download_resources.php"><i class="fa fa-download" aria-hidden="true"></i> Download Assignments</a> 
+    <a href="learning_homepage.php"><i class="fa fa-user  fa-home"></i> Home</a>
+    <a href="download_resources.php"><i class="fa fa-download" aria-hidden="true"></i> Download Assignments</a>
     <a href="stu_upload_ass.php"><i class="fa fa-upload" aria-hidden="true"></i> Upload Assignments </a>
         <a href="view_ass.php"><i class="fa fa-eye" aria-hidden="true"></i> Manage Your Uploaded Assignments </a>
     <a href="javascript:void(0);" class="icon" onclick="myFunction()">
@@ -185,9 +185,11 @@ function myFunction() {
       <th>Document Name</th>
       <th>Subject Name</th>
       <th>Message</th>
+      <th>Late Submission</th>
 	  <th>Download</th>
       <th>Manage</th>
-      
+
+
     </tr>
    <?php
 
@@ -200,47 +202,49 @@ function myFunction() {
 $c=1;
 
 while($row = mysqli_fetch_array($result)) {
-  
-  
+
+
   $i= $row['aid'];
   $d= $row['date'];
   $q = $row['doc'];
   $qid = $row['docid'];
   $a = $row['message'];
   $s_name = $row['subject'];
-  
+  $late=$row['late'];
+
     $result1 = mysqli_query($con,"SELECT doc_name FROM documents WHERE id= '$qid'") or die('Error1');
   while($row1 = mysqli_fetch_array($result1)) {
 
 $doc= $row1['doc_name'];
- 
+
   echo '<tr><td>'.$c++.'</td>
   <td>'.$d.'</td>
   <td>'.$doc.'</td>
   <td>'.$s_name.'</td>
   <td>'.$a.'</td>
+  <td>'.$late.'</td>
   <td><a href=assignment/'.$q.' download>
                     <i class="fa fa-download"></i>
                   </a></td>
   <td><a title="Delete Document" href="del_doc.php?aid='.$i.'"><i>Delete</i></a></td>';
-  
+
 }
 }
 $c=0;
 echo '</table></div></div>';
 
-?> 
-        
+?>
+
   </table>
 
-</div>        
+</div>
 
-  
+
 <br>
 <br>
 
-</div> 
-    
+</div>
+
     <?php
 include('../footer.php');
 ?>
