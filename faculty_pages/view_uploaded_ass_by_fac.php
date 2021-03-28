@@ -16,7 +16,7 @@ if($_SESSION['xy']=='')
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-     
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -24,9 +24,9 @@ body {
   position: relative;
   padding: 20px;
   background: white;
-  color: #21610B;  
+  color: #21610B;
   font-size: 15px;
-  
+
 }
 
 p{
@@ -63,7 +63,7 @@ font-size:25px;
 .manageuser{
 			font-family: "Times New Roman", Times, serif;
       font-size: 20px;
-      
+
 		}
   table {
   font-family: arial, sans-serif;
@@ -89,7 +89,7 @@ th {
 }
 .content {
   flex: 1 0 auto;
-}  
+}
 
 
 .navbar .icon {
@@ -97,7 +97,7 @@ th {
 }
 
 @media (max-width: 576px) {
-  
+
   .header{
     font-size:8px;
   }
@@ -156,15 +156,15 @@ th {
     <img src="IGDTUW-logo.png" alt="logo" />
     <h1>INDIRA GANDHI DELHI TECHNICAL UNIVERSITY FOR WOMEN</h1>
     <p>(Established by Govt. of Delhi vide Act 9 of 2012)</p>
-  </div> 
-  
-  
+  </div>
+
+
 <div class="navbar" id="myTopnav">
     <a class="active" href="fac_module.php"><i class="fa fa-file-text" aria-hidden="true"></i> Module</a>
-    <a href="fac_assignments_page.php"><i class="fa fa-user  fa-home"></i> Home</a>      
-    <a href="fac_upload_assignment.php"><i class="fa fa-upload" aria-hidden="true"></i> Upload Assignment </a> 
+    <a href="fac_assignments_page.php"><i class="fa fa-user  fa-home"></i> Home</a>
+    <a href="fac_upload_assignment.php"><i class="fa fa-upload" aria-hidden="true"></i> Upload Assignment </a>
     <a href="view_uploaded_ass_by_fac.php"><i class="fa fa-eye" aria-hidden="true"></i> Manage Uploads</a>
-    <a href="fac_download_ass.php"><i class="fa fa-download" aria-hidden="true"></i> Download Student Assignments </a> 
+    <a href="fac_download_ass.php"><i class="fa fa-download" aria-hidden="true"></i> Download Student Assignments </a>
 
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
@@ -191,9 +191,10 @@ function myFunction() {
       <th>Document Name</th>
       <th>Subject Name</th>
       <th>Message</th>
+      <th>DeadLine</th>
 	  <th>Download</th>
       <th>Manage</th>
-      
+
     </tr>
    <?php
 
@@ -205,42 +206,44 @@ $id= $_SESSION['idf'];
 $c=1;
 
 while($row = mysqli_fetch_array($result)) {
-  
-  
+
+
   $i= $row['id'];
   $d= $row['date'];
   $q = $row['doc_name'];
   $qid = $row['doc'];
   $a = $row['message'];
   $s_name = $row['sub_name'];
-  
- 
+  $ddate = $row['deaddate'];
+
+
   echo '<tr><td>'.$c++.'</td>
   <td>'.$d.'</td>
   <td>'.$q.'</td>
   <td>'.$s_name.'</td>
   <td>'.$a.'</td>
+  <td>'.$ddate.'</td>
   <td><a href=upload/'.$qid.' download>
                     <i class="fa fa-download"></i>
                   </a></td>
   <td><a title="Delete Document" href="del_doc.php?tid='.$i.'&doc='.$q.'"><i>Delete</i></a></td>';
-  
+
 }
 $c=0;
 echo '</table></div></div>';
 
-?> 
-        
+?>
+
   </table>
 
-</div>        
+</div>
 
-  
+
 <br>
 <br>
 
-</div> 
-    
+</div>
+
     <?php
 include('../footer.php');
 ?>
