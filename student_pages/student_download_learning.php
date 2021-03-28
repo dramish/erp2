@@ -30,7 +30,7 @@ if($_SESSION['xy']=='')
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-     
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -38,9 +38,9 @@ body {
   position: relative;
   padding: 20px;
   background: white;
-  color: #21610B;  
+  color: #21610B;
   font-size: 15px;
-  
+
 }
 
 p{
@@ -82,7 +82,7 @@ font-size:25px;
   .manageuser{
       font-family: "Times New Roman", Times, serif;
       font-size: 20px;
-      
+
     }
   table {
   font-family: arial, sans-serif;
@@ -108,12 +108,12 @@ th {
 }
 .content {
   flex: 1 0 auto;
-}  
+}
 .navbar .icon {
   display: none;
 }
 @media (max-width: 576px) {
-  
+
   .header{
     font-size:8px;
   }
@@ -173,14 +173,14 @@ th {
     <img src="IGDTUW-logo.png" alt="logo" />
     <h1>INDIRA GANDHI DELHI TECHNICAL UNIVERSITY FOR WOMEN</h1>
     <p>(Established by Govt. of Delhi vide Act 9 of 2012)</p>
-  </div> 
-  
-  
-  
+  </div>
+
+
+
   <div class="navbar" id="myTopnav">
     <a href="module_page.php"><i class="fa fa-file-text" aria-hidden="true"></i> Module</a>
-    <a href="classroom_page.php"><i class="fa fa-user  fa-home"></i> Home</a>      
-    <a href="student_video_conf.php"><i class="fa fa-download" aria-hidden="true"></i> Attend Class</a> 
+    <a href="classroom_page.php"><i class="fa fa-user  fa-home"></i> Home</a>
+    <a href="student_video_conf.php"><i class="fa fa-download" aria-hidden="true"></i> Attend Class</a>
     <a href="student_attendance_page.php"><i class="fa fa-files-o" aria-hidden="true"></i>View Attendance</a>
     <a href="student_download_learning.php"><i class="fa fa-files-o" aria-hidden="true"></i>Download Learning Material</a>
     <a href="student_timetable.php"><i class="fa fa-files-o" aria-hidden="true"></i>Class Timetable</a>
@@ -215,18 +215,17 @@ function myFunction() {
             <th>Document Type</th>
             <th>Message</th>
           </tr>
-          
+
              <?php
 
-
-  $result = mysqli_query($con,"SELECT * FROM documents where prog='$p' and branch='$br' and sem='$s' and options='Learning Resource'") or die('Error');
+  $result = mysqli_query($con,"SELECT * FROM documents where prog='$p' and branch='$br' and sem='$s' and options='LearningResource'") or die('Error');
 $c=0;
 
 while($row = mysqli_fetch_array($result)) {
-  
+
   $d= $row['date'];
   $q = $row['doc_name'];
-  $qid = $row['doc'];
+  $qid = $row['id'];
   $a = $row['message'];
   $s_name = $row['sub_name'];
   $tid=$row['teacher_id'];
@@ -253,12 +252,12 @@ while($row = mysqli_fetch_array($result)) {
 $c=0;
 echo '</table></div></div>';
 
-?> 
+?>
         </table>
 
-    </div>        
-    </div> 
-    
+    </div>
+    </div>
+
     <?php
 include('../footer.php');
 ?>
