@@ -33,7 +33,7 @@ $docid=$_GET["docid"];
 /* Style the body */
 .content {
   flex: 1 0 auto;
-}  
+}
 body {
   font-family: Arial;
   /* margin: 0; */
@@ -44,9 +44,9 @@ body {
   position: relative;
   padding: 20px;
   background: white;
-  color: #21610B;  
+  color: #21610B;
   font-size: 15px;
-  
+
 }
 p{
 color:black;
@@ -69,7 +69,7 @@ font-size:25px;
   color:white;
    font-size:30px;
   }
-*/ 
+*/
 
  .main h1{
     font-family: "Times New Roman", Georgia, Serif;
@@ -77,7 +77,7 @@ font-size:25px;
     color:#5e0c17;
     text-align: center;
   }
-  
+
     .navbar {
   overflow: hidden;
   background-color:#555;
@@ -98,7 +98,7 @@ font-size:25px;
 }
 
 /*.dropdown .dropbtn {
-  font-size: 16px;  
+  font-size: 16px;
   border: none;
   outline: none;
   color: white;
@@ -141,7 +141,7 @@ font-size:25px;
 .manageuser{
 			font-family: "Times New Roman", Times, serif;
       font-size: 20px;
-      
+
 		}
     table {
   font-family: arial, sans-serif;
@@ -169,7 +169,7 @@ th {
   display: none;
 }
 @media (max-width: 576px) {
-  
+
   .header{
     font-size:8px;
   }
@@ -207,15 +207,15 @@ th {
   <img src="IGDTUW-logo.png" alt="logo" />
   <h1>INDIRA GANDHI DELHI TECHNICAL UNIVERSITY FOR WOMEN</h1>
   <p>(Established by Govt. of Delhi vide Act 9 of 2012)</p>
-</div>    
+</div>
 
 <div class="navbar">
-	
+
     <a href="fac_module.php"><i class="fa fa-file-text" aria-hidden="true"></i> Module</a>
-    <a href="fac_teaching_home.php"><i class="fa fa-user  fa-home"></i> Home</a>      
-    <a href="fac_upload.php"><i class="fa fa-upload" aria-hidden="true"></i> Upload Assignment </a> 
+    <a href="fac_teaching_home.php"><i class="fa fa-user  fa-home"></i> Home</a>
+    <a href="fac_upload.php"><i class="fa fa-upload" aria-hidden="true"></i> Upload Assignment </a>
     <a href="view_uploaded_ass_by_fac.php"><i class="fa fa-eye" aria-hidden="true"></i> Manage Uploads</a>
-    <a href="fac_download_ass.php"><i class="fa fa-download" aria-hidden="true"></i> Download Student Assignments </a> 
+    <a href="fac_download_ass.php"><i class="fa fa-download" aria-hidden="true"></i> Download Student Assignments </a>
 
   </div>
       <script>
@@ -242,9 +242,10 @@ function myFunction() {
     <th>Name</th>
     <th>Enrollment No.</th>
     <th>Email</th>
+    <th>Late</th>
      <th>Download</th>
   </tr>
-  
+
 <?php
 
 
@@ -255,17 +256,19 @@ function myFunction() {
 $c=1;
 
 while($row = mysqli_fetch_array($result)) {
- 
+
   $email = $row['stuemail'];
   $doc=$row['doc'];
- 
+  $late=$row['late'];
+
    $result1 = mysqli_query($con,"SELECT * FROM login_student WHERE email='$email' AND program='$prog' AND branch='$branch' AND semester='$sem' ORDER BY rollno ") or die('Error');
 
 while($row1 = mysqli_fetch_array($result1)) {
 
 $name=$row1['name'];
  $rn = $row1['rollno'];
-  echo '<tr><td>'.$c++.'</td><td>'.$name.'</td><td>'.$rn.'</td><td>'.$email.'</td>
+
+  echo '<tr><td>'.$c++.'</td><td>'.$name.'</td><td>'.$rn.'</td><td>'.$email.'</td><td>'.$late.'</td>
     <td><a href=../student_pages/assignment/'.$doc.' download><i class="fa fa-download"></i></a></td></tr>';
 
 
@@ -282,8 +285,8 @@ echo '</table></div>';
 </div>
 <br>
 <br>
-</div> 
-    
+</div>
+
     <?php
 include('../footer.php');
 ?>
