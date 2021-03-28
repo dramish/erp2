@@ -30,7 +30,7 @@ if($_SESSION['xy']=='')
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-     
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -38,9 +38,9 @@ body {
   position: relative;
   padding: 20px;
   background: white;
-  color: #21610B;  
+  color: #21610B;
   font-size: 15px;
-  
+
 }
 
 p{
@@ -82,7 +82,7 @@ font-size:25px;
   .manageuser{
 			font-family: "Times New Roman", Times, serif;
       font-size: 20px;
-      
+
 		}
   table {
   font-family: arial, sans-serif;
@@ -108,12 +108,12 @@ th {
 }
 .content {
   flex: 1 0 auto;
-}  
+}
 .navbar .icon {
   display: none;
 }
 @media (max-width: 576px) {
-  
+
   .header{
     font-size:8px;
   }
@@ -173,14 +173,14 @@ th {
     <img src="IGDTUW-logo.png" alt="logo" />
     <h1>INDIRA GANDHI DELHI TECHNICAL UNIVERSITY FOR WOMEN</h1>
     <p>(Established by Govt. of Delhi vide Act 9 of 2012)</p>
-  </div> 
-  
-  
-  
+  </div>
+
+
+
   <div class="navbar" id="myTopnav">
     <a class="active" href="module_page.php"><i class="fa fa-file-text" aria-hidden="true"></i> Module</a>
-    <a href="learning_homepage.php"><i class="fa fa-user  fa-home"></i> Home</a>      
-    <a href="download_resources.php"><i class="fa fa-download" aria-hidden="true"></i> Download Assignments</a> 
+    <a href="learning_homepage.php"><i class="fa fa-user  fa-home"></i> Home</a>
+    <a href="download_resources.php"><i class="fa fa-download" aria-hidden="true"></i> Download Assignments</a>
     <a href="stu_upload_ass.php"><i class="fa fa-upload" aria-hidden="true"></i> Upload Assignments </a>
         <a href="view_ass.php"><i class="fa fa-eye" aria-hidden="true"></i> Manage Your Uploaded Assignments </a>
     <a href="javascript:void(0);" class="icon" onclick="myFunction()">
@@ -211,10 +211,10 @@ function myFunction() {
             <th>Given by faculty</th>
             <th>Subject Name</th>
             <th>Download</th>
-            <th>Document Type</th>
             <th>Message</th>
+            <th>DeadLine</th>
           </tr>
-          
+
              <?php
 
 
@@ -222,7 +222,7 @@ function myFunction() {
 $c=0;
 
 while($row = mysqli_fetch_array($result)) {
-  
+
   $d= $row['date'];
   $q = $row['doc_name'];
   $qid = $row['doc'];
@@ -230,6 +230,7 @@ while($row = mysqli_fetch_array($result)) {
   $s_name = $row['sub_name'];
   $tid=$row['teacher_id'];
   $op=$row['options'];
+  $dd=$row['deaddate'];
   $tn;
 
   $result1 = mysqli_query($con,"SELECT tname FROM login_faculty WHERE id='$tid' ") or die('Error2');
@@ -246,18 +247,18 @@ while($row = mysqli_fetch_array($result)) {
   <td>'.$s_name.'</td>
   <td><a href=../faculty_pages/upload/'.$qid.' download>
                     <i class="fa fa-download"></i>
-                  </a></td><td>'.$op.'</td>
-  <td>'.$a.'</td></tr>';
+                  </a>
+  <td>'.$a.'</td></td><td>'.$dd.'</td></tr>';
 }
 $c=0;
 echo '</table></div></div>';
 
-?> 
+?>
         </table>
 
-    </div>        
-    </div> 
-    
+    </div>
+    </div>
+
     <?php
 include('../footer.php');
 ?>
