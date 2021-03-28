@@ -9,9 +9,9 @@ session_start();
           $p = $row['program'];
           $br = $row['branch'];
           $s = $row['semester'];
-      $_SESSION["prog"]=$p; 
-      $_SESSION["bran"]=$br; 
-      $_SESSION["sem"]=$s; 
+      $_SESSION["prog"]=$p;
+      $_SESSION["bran"]=$br;
+      $_SESSION["sem"]=$s;
     }
 ?>
 <!DOCTYPE html>
@@ -30,7 +30,7 @@ body {
   position: relative;
   padding: 20px;
   background: white;
-  color: #21610B;  
+  color: #21610B;
   font-size: 15px;
 }
 p{
@@ -61,7 +61,7 @@ font-size:25px;
 }
 .content {
   flex: 1 0 auto;
-}  
+}
 * {
   box-sizing: border-box;
 }
@@ -215,11 +215,11 @@ select{
     <img src="IGDTUW-logo.png" alt="logo" />
     <h1>INDIRA GANDHI DELHI TECHNICAL UNIVERSITY FOR WOMEN</h1>
     <p>(Established by Govt. of Delhi vide Act 9 of 2012)</p>
-  </div> 
+  </div>
     <div class="navbar" id="myTopnav">
     <a class="active" href="module_page.php"><i class="fa fa-file-text" aria-hidden="true"></i> Module</a>
-    <a href="learning_homepage.php"><i class="fa fa-user  fa-home"></i> Home</a>      
-    <a href="download_resources.php"><i class="fa fa-download" aria-hidden="true"></i> Download Assignments</a> 
+    <a href="learning_homepage.php"><i class="fa fa-user  fa-home"></i> Home</a>
+    <a href="download_resources.php"><i class="fa fa-download" aria-hidden="true"></i> Download Assignments</a>
     <a href="stu_upload_ass.php"><i class="fa fa-upload" aria-hidden="true"></i> Upload Assignments </a>
         <a href="view_ass.php"><i class="fa fa-eye" aria-hidden="true"></i> Manage Your Uploaded Assignments </a>
     <a href="javascript:void(0);" class="icon" onclick="myFunction()">
@@ -248,7 +248,7 @@ function myFunction() {
     echo'<select  name="subjname" id="disabledSelect" onChange="getSubject(this.value);" required>
     <option value="">Select Subject</option>';
 ?>
-<?php 
+<?php
     $sel=mysqli_query($con, "select s.subjcode,s.subjname from coursedetails as c inner join subject as s on c.branch=s.branch and c.subjcode=s.subjcode and s.tid=c.tid where c.program='$p' and c.semester='$s' and c.branch='$br'");
       while($data=mysqli_fetch_array($sel))
                 {
@@ -258,7 +258,7 @@ function myFunction() {
                   <?php echo $data["subjname"];?>
                 </option>
              <?php
-             }    
+             }
       ?>
       </select>
     <label for="title"><b>Assignment</b></label>
@@ -266,8 +266,8 @@ function myFunction() {
     <option value="">Select Assignment </option>
     </select>
     <label for="date"><b>Date of upload</b></label>
-    <?php 
-    $d=date("d-m-Y");
+    <?php
+    $d=date("Y-m-d");
     echo '<input type="text" name="date1" value="'.$d.'" required readonly>';
     ?>
     <label for="file"><b>Upload File</b>&nbsp;&nbsp;(only .pdf files can be uploaded)</label>
@@ -276,7 +276,7 @@ function myFunction() {
   <textarea id="text" name="text" placeholder="Enter the message " style="height:200px"></textarea>
  <hr>
     <button name="sub" type="submit" class="registerbtn">SUBMIT</button>
-  </div>  
+  </div>
 </form>
 <?php
 if(isset($_POST["sub"]))
@@ -298,7 +298,18 @@ if(isset($_POST["sub"]))
   {
         $fileName = str_replace(" ", "_", $img);
           move_uploaded_file($store,"assignment/".$fileName);
-      $query1="INSERT INTO assignment VALUES ('','$docid', '$da','$fileName', '$e','$sn', '$txt')";
+
+         $sql1="SELECT deaddate  FROM documents WHERE id = '$docid' AND options='Assignment' ";
+         $result1 = mysqli_query($con,$sql1)or die('Error');
+         $islate = "YES";
+         while($rs2=mysqli_fetch_array($result1)) {
+             $dd=$rs2["deaddate"];
+             if(strtotime($d) < strtotime($dd))
+                  $islate="NO";
+
+         }
+
+      $query1="INSERT INTO assignment VALUES ('','$docid', '$da','$fileName', '$e','$sn', '$txt','$islate')";
       $row1=mysqli_query($con, $query1);
       if($row1 > 0)
       {
@@ -310,7 +321,7 @@ if(isset($_POST["sub"]))
       {
         echo "<script>alert('Unsuccessful')</script>";
       }
-  } 
+  }
       else
       {
 //$query="INSERT INTO documents VALUES ('', '$timezone','$c','$a', '', '$b','$id')";
@@ -322,7 +333,7 @@ if(isset($_POST["sub"]))
 ?>
 <br>
 </div>
-</div> 
+</div>
     <?php
 include('../footer.php');
 ?>
