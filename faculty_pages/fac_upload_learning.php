@@ -13,7 +13,7 @@ session_start();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <style>
-     
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -21,9 +21,9 @@ body {
   position: relative;
   padding: 20px;
   background: white;
-  color: #21610B;  
+  color: #21610B;
   font-size: 15px;
-  
+
 }
 
 p{
@@ -56,7 +56,7 @@ font-size:25px;
 }
 .content {
   flex: 1 0 auto;
-}  
+}
 * {
   box-sizing: border-box;
 }
@@ -126,7 +126,7 @@ label{
 
 
 @media (max-width: 576px) {
-  
+
   .header{
     font-size:8px;
   }
@@ -172,7 +172,7 @@ label{
  margin-right:auto;
  font-size:10px;
  width:90%;
- 
+
 }
 
 ::placeholder{
@@ -187,10 +187,10 @@ select{
     margin-left:5%;
 }
  }
- 
+
         </style>
         <link rel = "icon" type = "image/png" href = "IGDTUW-Logo.png">
-    <title>Faculty Upload Assignment</title>
+    <title>Faculty Upload Notes</title>
 </head>
 <body>
 <a name="top"></a>
@@ -199,12 +199,12 @@ select{
     <img src="IGDTUW-logo.png" alt="logo" />
     <h1>INDIRA GANDHI DELHI TECHNICAL UNIVERSITY FOR WOMEN</h1>
     <p>(Established by Govt. of Delhi vide Act 9 of 2012)</p>
-  </div> 
+  </div>
 
 <div class="navbar" id="myTopnav">
     <a href="fac_module.php"><i class="fa fa-file-text" aria-hidden="true"></i> Module</a>
     <a href="fac_resources.php"><i class="fa fa-user  fa-home"></i> Home</a>
-    <a href="fac_upload_learning.php"><i class="fa fa-upload" aria-hidden="true"></i> Upload Learning Resources </a> 
+    <a href="fac_upload_learning.php"><i class="fa fa-upload" aria-hidden="true"></i> Upload Learning Resources </a>
     <a href="fac_manage_learning.php"><i class="fa fa-eye" aria-hidden="true"></i> Manage Uploaded Resources</a>
 
 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
@@ -228,7 +228,7 @@ function myFunction() {
     <h2 style="text-align:center;">Upload Documents</h2>
     <hr>
     <label for="prog"><b>Programme</b></label>
-    
+
     <select id="prog" name="progname" required>
       <option value="">Select</option>
       <?php
@@ -239,15 +239,15 @@ function myFunction() {
 	 while($row1=mysqli_fetch_array($q1))
 	  {
     $n=$row1["program"];
-  	
-    
+
+
     echo '<option value="'.$n.'">'.$n.'</option>';
-    
-  
+
+
 	  }
   ?>
     </select>
-  
+
 
 	<label for="branch"><b>Branch</b></label>
   <select id="branch" name="branchname" required>
@@ -260,14 +260,14 @@ function myFunction() {
 	 while($row1=mysqli_fetch_array($q1))
 	  {
     $n=$row1["branch"];
-  	
-    
+
+
     echo '<option value="'.$n.'">'.$n.'</option>';
-    
-  
+
+
 	  }
   ?>
-    
+
   </select>
 
 	<label for="sem"><b>Semester</b></label>
@@ -281,11 +281,11 @@ function myFunction() {
 	 while($row1=mysqli_fetch_array($q1))
 	  {
     $n=$row1["semester"];
-  	
-    
+
+
     echo '<option value="'.$n.'">'.$n.'</option>';
-    
-  
+
+
 	  }
   ?>
   </select>
@@ -300,34 +300,27 @@ function myFunction() {
 	 while($row1=mysqli_fetch_array($q1))
 	  {
     $n=$row1["subjname"];
-  	
-    
+
+
     echo '<option value="'.$n.'">'.$n.'</option>';
-    
-  
+
+
 	  }
   ?>
-  
+
   </select>
-  
-   <label for="sub"><b>Pls. specify the type of document.</b></label>
-  <select id="op" name="options" required>
-  <option value="">Select</option>
-  <option value="Assignment">Assignment</option>
-  <option value="LearningResource">Learning Resource</option>
-  </select>
-  
+
     <label for="msg"><b>Message</b></label>
   <textarea id="msg" name="msg" placeholder="Enter the message. " style="height:200px" required></textarea>
-    
+
   <label for="title"><b>Title</b></label>
     <input type="text" placeholder="Enter the title" name="title" required>
-    
+
   <label for="file"><b>Upload File</b>&nbsp;&nbsp;(only .pdf files can be uploaded)</label>
     <input type="file" name="file" required>
  <hr>
     <button name="sub" type="submit" class="registerbtn">SUBMIT</button>
-  </div>  
+  </div>
 </form>
 
 
@@ -336,63 +329,64 @@ function myFunction() {
 if(isset($_POST["sub"]))
 {
   //$timezone= date_default_timezone_get();
-  $timezone= date("d-m-Y");
+  $timezone= date("Y-m-d");
   $id=$_SESSION["idf"];
   $a= $_POST["title"];
   $b= $_POST["msg"];
   $c= $_POST["subject"];
-  
+
   $prog=$_POST['progname'];
   $branch=$_POST['branchname'];
   $sem= $_POST['semname'];
-  $op=$_POST["options"];
-  
-  
-      $img=basename($_FILES["file"]["name"]);
-        $type=$_FILES["file"]["type"];
-        $size=$_FILES["file"]["size"];
-        $store=$_FILES["file"]["tmp_name"];
- 
-        //for support only image code here
-      $n=explode('.',$img);
-      $p=pathinfo("upload/".$img,PATHINFO_EXTENSION);
-      $q=array("pdf","PDF");
-      
-  if(in_array($p,$q))
+  $ddate=date("Y-m-d");;
+  $op="LearningResource";
+
+
+  $img=basename($_FILES["file"]["name"]);
+    $type=$_FILES["file"]["type"];
+    $size=$_FILES["file"]["size"];
+    $store=$_FILES["file"]["tmp_name"];
+
+    //for support only image code here
+  $n=explode('.',$img);
+  $p=pathinfo("upload/".$img,PATHINFO_EXTENSION);
+  $q=array("pdf","PDF");
+
+if(in_array($p,$q))
+{
+
+    $fileName = str_replace(" ", "_", $img);
+      move_uploaded_file($store,"upload/".$fileName);
+
+  $query1="INSERT INTO documents VALUES ('','$timezone','$ddate', '$c','$a', '$fileName', '$b','$id', '$prog', '$branch', '$sem','$op')";
+  $row=mysqli_query($con, $query1);
+  if($row > 0)
   {
-    
-        $fileName = str_replace(" ", "_", $img);
-          move_uploaded_file($store,"upload/".$fileName);
-          
-      $query1="INSERT INTO documents VALUES ('','$timezone', '$c','$a', '$fileName', '$b','$id', '$prog', '$branch', '$sem','$op')";
-      $row=mysqli_query($con, $query1);
-      if($row > 0)
-      {
-      //echo "33";
-        echo "<script>alert('success done')</script>";
-        echo "<script>window.location.href='assign_submit.php'</script>";
-      }
-      else
-      {
-        
-        echo "<script>alert('not done')</script>";
-      }
-  } 
-      else
-      {
+  //echo "33";
+    echo "<script>alert('success done')</script>";
+    echo "<script>window.location.href='assign_submit.php'</script>";
+  }
+  else
+  {
+
+    echo "<script>alert('not done')</script>";
+  }
+}
+  else
+  {
 //$query="INSERT INTO documents VALUES ('', '$timezone','$c','$a', '', '$b','$id')";
 //$row=mysqli_query($con, $query);
-       echo "<script>alert('Only PDF files can be uploaded')</script>";
-        echo "<script>window.location.href='fac_upload.php'</script>";
-      }
- 
+   echo "<script>alert('Only PDF files can be uploaded')</script>";
+    echo "<script>window.location.href='fac_upload.php'</script>";
+  }
+
 }
 ?>
 <br>
 </div>
 
-</div> 
-    
+</div>
+
     <?php
 include('../footer.php');
 ?>
