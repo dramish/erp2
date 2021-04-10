@@ -17,6 +17,11 @@ if($_SESSION['xy']=='')
   $result = mysqli_query($con,"SELECT time FROM quiz where quizid='$ttid'") or die('Error');
 while($row = mysqli_fetch_array($result)) {
   $val=$row['time'];
+  if($val == '1') {
+    echo "<script>alert('Test has been stopped. Proceed to see your result.')</script>";
+ 
+       echo "<script>window.location.href='stu_result.php'</script>";
+  }
 }
 ?>
 <!DOCTYPE html>
