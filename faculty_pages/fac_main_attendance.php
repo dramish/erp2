@@ -88,46 +88,10 @@ font-size:25px;
   overflow: hidden;
 }
 
-/*.dropdown .dropbtn {
-  font-size: 16px;  
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
-}*/
 
 .navbar a:hover, .dropdown:hover .dropbtn {
   background-color: #4CAF50;
 }
-
-/*.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.dropdown-content a:hover {
-  background-color: rgba(165, 161, 161, 0.397);
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}*/
 
 .manageuser{
       font-family: "Times New Roman", Times, serif;
@@ -247,17 +211,28 @@ function myFunction() {
 }
 </script>
 <br>
-<div class="main">
-<h1>Attendance Record</h1>
+
+
+<div class="main"><h1>
+
+<?php 
+
+$p = $_GET['p'];
+$b = $_GET['b'];
+$s = $_GET['s'];
+
+echo 'Attendance record for '.$p.' '.$b.' ('.$s.' semester)';
+
+?>
+ </h1>
 </div>
+
  <br>
 <div class = "manageuser">
   <table align="center">
   <tr>
-    <th>Program</th>
-    <th>Branch</th>
-    <th>Semester</th>
-    <th>Roll No.</th>
+    <th>S. No.</th>
+    <th>Enrollment Number</th>
     <th>Cumulative Attendance</th>
     <th>Today's attendance</th>
     <th>View dates</th>
@@ -266,24 +241,13 @@ function myFunction() {
   
 <?php
 
-$p = $_GET['p'];
-$b = $_GET['b'];
-$s = $_GET['s'];
+  $sno=1;
 
 $tId=$_SESSION['idf'];
  $d=date("d-m-Y");
   $result = mysqli_query($con,"SELECT login_student.email, login_student.program, login_student.branch, login_student.semester, rollno from login_student, coursedetails WHERE login_student.branch = '$b' AND coursedetails.branch = '$b' AND login_student.program = '$p' AND coursedetails.program = '$p' AND login_student.semester = '$s' AND coursedetails.semester = '$s' AND coursedetails.tid = '$tId' ORDER BY rollno") or die('Error');
 
 while($row = mysqli_fetch_array($result)) {
-  // $id = $row['stu_id'];
-  // $name = $row['name'];
-  // $mob = $row['mob'];
-  // $rn = $row['rollno'];
-  // $att = $row['atten'];
-  // $email = $row['email'];
- 
-  // echo '<tr><td>'.$id.'</td><td>'.$name.'</td><td>'.$rn.'</td><td>'.$email.'</td><td>'.$mob.'</td><td>'.$att.'</td>
-  // <td><a title="Delete User" href="deluser.php?demail='.$email.' "><i>Delete User</i></a></td></tr>';
 
 $program = $row['program'];
 $branch = $row['branch'];
@@ -312,11 +276,11 @@ $em = $row['email'];
   if ($ro['sum(attendance_trial.attend)'])
     $ra=$ro['sum(attendance_trial.attend)'];
 else $ra = 0;
-      echo '<tr><td>'.$program.'</td><td>'.$branch.'</td><td>'.$semester.'</td><td>'.$roll.'</td><td>'.$ra.'</td><td>'.$fig.'</td><td><a title="View" href="indi_student.php?qid='.$em.'"><i>View Dates</i></a></td><td><a title="View" href="indi_student_edit.php?qid='.$em.'"><i>Edit Attendance</i></a></td></tr>';
+      echo '<tr><td>'.$sno++.'</td><td>'.$roll.'</td><td>'.$ra.'</td><td>'.$fig.'</td><td><a title="View" href="indi_student.php?qid='.$em.'"><i>View Dates</i></a></td><td><a title="View" href="indi_student_edit.php?qid='.$em.'"><i>Edit Attendance</i></a></td></tr>';
 
   }
 
-
+// <td>'.$program.'</td><td>'.$branch.'</td><td>'.$semester.'</td>
 
 }
 echo '</table></div>';
