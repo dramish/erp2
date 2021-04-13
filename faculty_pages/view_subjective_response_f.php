@@ -12,7 +12,7 @@ if($_SESSION['xy']=='')
 ?>
 
 <?php
-  
+
     //$res=$_GET["ans"];
   $hid = $_GET["hid"];
   $qid=$_GET["qid"];
@@ -30,7 +30,7 @@ if($_SESSION['xy']=='')
 /* Style the body */
 .content {
   flex: 1 0 auto;
-}  
+}
 body {
   font-family: Arial;
   /* margin: 0; */
@@ -41,9 +41,9 @@ body {
   position: relative;
   padding: 20px;
   background: white;
-  color: #21610B;  
+  color: #21610B;
   font-size: 15px;
-  
+
 }
 p{
 color:black;
@@ -66,7 +66,7 @@ font-size:25px;
   color:white;
    font-size:30px;
   }*/
- 
+
  .registerbtn {
   background-color: #4CAF50;
   color: white;
@@ -110,7 +110,7 @@ font-size:25px;
 .manageuser{
       font-family: "Times New Roman", Times, serif;
       font-size: 20px;
-      
+
     }
     table {
   font-family: arial, sans-serif;
@@ -157,7 +157,7 @@ th {
   display: none;
 }
 @media (max-width: 576px) {
-  
+
   .header{
     font-size:8px;
   }
@@ -214,7 +214,7 @@ th {
   <img src="IGDTUW-logo.png" alt="logo" />
   <h1>INDIRA GANDHI DELHI TECHNICAL UNIVERSITY FOR WOMEN</h1>
   <p>(Established by Govt. of Delhi vide Act 9 of 2012)</p>
-</div>    
+</div>
 
     <div class="navbar" id="myTopnav">
     <a class="active" href="fac_module.php"><i class="fa fa-file-text" aria-hidden="true"></i> Module</a>
@@ -241,37 +241,41 @@ function myFunction() {
 <div class="main">
 <h1>Response </h1>
 </div>
- 
+
 <div class = "manageuser">
 
 
 
- 
+
   <table align="center">
   <tr>
     <th>SNo.</th>
     <th>Question</th>
     <th>Response</th>
+    <th>Download</th>
   </tr>
 
     <?php
-  
+
     $query = "SELECT * FROM subjective_history WHERE hid='$hid'";
   $result = mysqli_query($con,$query) or die('Error first');
-  while($row = mysqli_fetch_array($result)) {   
+  while($row = mysqli_fetch_array($result)) {
   $aid= $row["stud_ans"];
   $qList = $row['indiQues'];
+  $pics = $row['image'];
 
 $ans_array=explode("@",$aid);
 $ques_array=explode("`",$qList);
+$pics_array=explode("#",$pics);
 
  //print_r($ans_array);
   $len=count($ans_array);
-  
+
   for ($x = 0; $x < $len-1; $x++)
   {
   	$opid1=$ans_array[$x];
     $qpId1=$ques_array[$x];
+    $pic=$pics_array[$x];
   	//$ua=substr($opid1,0,1);
   	//if($ua != "U")
   	//{
@@ -280,7 +284,8 @@ $ques_array=explode("`",$qList);
 		  // $qu =$row['ques'];
 		  // $opt=$row['option'];
 		  $c=$x+1;
-		  echo '<tr><td>'.$c.'</td><td>'.$qpId1.'</td><td>'.$opid1.'</td></tr> ';
+		  echo '<tr><td>'.$c.'</td><td>'.$qpId1.'</td><td>'.$opid1.'</td>
+          <td><a href=../student_pages/'.$pic.' download><i class="fa fa-download"></i></a></td</tr> ';
 		}
   	//}
   // 	else
@@ -289,16 +294,16 @@ $ques_array=explode("`",$qList);
   // 	 $c=$x+1;
 	 // echo '<tr><td>'.$c.'</td><td>'.$questt.'</td><td>Unattempted</td></tr> ';
   // 	}
-  	
-  }	
+
+  }
 
 echo '</table></div>';
 ?>
 
-<?php 
+<?php
 $q = "SELECT totalques, correct FROM subjective_quiz WHERE subjective_quizId='$qid'";
             $result = mysqli_query($con,$q) or die('Error first');
-  while($row = mysqli_fetch_array($result)) { 
+  while($row = mysqli_fetch_array($result)) {
   $tq=$row["totalques"];
   $corr = $row["correct"]; }
 
@@ -315,7 +320,7 @@ $q = "SELECT totalques, correct FROM subjective_quiz WHERE subjective_quizId='$q
         if(isset($_POST["sub"]))
         {
           $finalScore=$_POST["finalScore"];
-          
+
 
 $query="UPDATE subjective_history SET score='$finalScore' WHERE  hid = '$hid' ";
       $row=mysqli_query($con, $query);
@@ -337,13 +342,14 @@ $query="UPDATE subjective_history SET score='$finalScore' WHERE  hid = '$hid' ";
 
   }
 
-  ?>      
+  ?>
 
-</div> 
-    
+</div>
+
     <?php
 include('../footer.php');
 ?>
 
 </body>
 </html>
+
