@@ -30,12 +30,12 @@ while($row = mysqli_fetch_array($result)) {
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
 document.onkeydown = function(e) {
-        if ((e.keyCode === 13 ) || (e.keyCode === 116 ) || (e.ctrlKey && 
-            (e.keyCode === 67 || 
-             e.keyCode === 86 || 
+        if ((e.keyCode === 13 ) || (e.keyCode === 116 ) || (e.ctrlKey &&
+            (e.keyCode === 67 ||
+             e.keyCode === 86 ||
              e.keyCode === 85 ||
              e.keyCode === 82 ||
-             e.keyCode === 84 || 
+             e.keyCode === 84 ||
              e.keyCode === 117))) {
             return false;
         } else {
@@ -54,7 +54,7 @@ body {
   position: relative;
   padding: 20px;
   background: white;
-  color: #21610B;  
+  color: #21610B;
   font-size: 15px;
 }
 p{
@@ -91,11 +91,11 @@ font-size:25px;
     border:2px solid #ddd;
     font-family: "Times New Roman", Georgia, Serif;
     font-size: 20px;
-    } 
+    }
     .manageuser{
       font-family: "Times New Roman", Times, serif;
       font-size: 20px;
-    } 
+    }
     .navbar {
   overflow: hidden;
   background-color:#555;
@@ -123,7 +123,7 @@ body {
   position: relative;
   padding: 40px;
   background: white;
-  color: #21610B;  
+  color: #21610B;
   font-size: 10px;
 }
 p{
@@ -150,11 +150,11 @@ font-size:15px;
     border:2px solid #ddd;
     font-family: "Times New Roman", Georgia, Serif;
     font-size: 20px;
-    } 
+    }
     .manageuser{
       font-family: "Times New Roman", Times, serif;
       font-size: 20px;
-    } 
+    }
     .navbar {
   overflow: hidden;
   background-color:#555;
@@ -177,7 +177,7 @@ input[type=submit] {
   border-radius: 4px;
   cursor: pointer;
   margin-left:40%;
-  font-size:18px; 
+  font-size:18px;
   float: left;
 }
 input[type=submit]:hover {
@@ -208,7 +208,7 @@ input[type=submit]:hover {
 }
 .content {
   flex: 1 0 auto;
-}  
+}
 .title1{
   margin-left:47%;
   font-size:30px;
@@ -343,13 +343,24 @@ input[type=submit]:hover {
 <button class="button button1">
 <div id="countdown"></div>
 <div id="notifier"></div>
-</button>  </div></div>  
+</button>  </div></div>
 <br><br><br><br><br>
 <br><br><br><br><br>
+<div id="my_camera"></div>
 <br>
 <html>
 <body>
- <script type="text/javascript">
+ <script type="text/javascript" src="webcamjs/webcam.js"></script>
+ <script language="JavaScript">
+     Webcam.set({
+         width: 250,
+         height: 170,
+         image_format: 'jpeg',
+         jpeg_quality: 90
+     });
+     Webcam.attach( '#my_camera' );
+ </script>
+ <script language="JavaScript">
 (function () {
   function display( notifier, str ) {
     document.getElementById(notifier).innerHTML = str;
@@ -363,15 +374,32 @@ input[type=submit]:hover {
     document.getElementById("countdown").style.textAlign = "right";
     document.getElementById("notifier").style.textAlign = "right";
   }
+
+  function take_snapshot() {
+          Webcam.snap(function(data_uri) {
+
+          var formdata = new FormData();
+          formdata.append("base64image", data_uri);
+          var ajax = new XMLHttpRequest();
+
+          ajax.open("POST", "saveimage.php");
+          ajax.send(formdata);
+      });
+  }
+
   function toMinuteAndSecond( x ) {
     return Math.floor(x/60) + ":" + (x=x%60 < 1 ? 0 : x%60);
   }
   function setTimer( remain, actions ) {
     var action;
+    var ot = remain;
     (function countdown() {
        display("countdown", toMinuteAndSecond(remain));
        if (action = actions[remain]) {
          action();
+       }
+       if(remain == (ot/2)){
+           take_snapshot();
        }
        if (remain > 0) {
          remain -= 1;
@@ -379,8 +407,8 @@ input[type=submit]:hover {
        }
      else if(remain==0)
      {
-       document.getElementById("sub").click(); 
-       
+       document.getElementById("sub").click();
+
       // window.location.href = "stu_result.php";
      }
     })(); // End countdown
@@ -391,7 +419,7 @@ input[type=submit]:hover {
      0: function () { display("notifier", "Time is up");       }
   });
 })();
-</script> 
+</script>
 </body>
 </html>
 <div id="countdown"></div>
@@ -416,7 +444,7 @@ input[type=submit]:hover {
 //echo $index;
   //$arr= array();
   //global $arr;
-  
+
   $arr=$_SESSION["arr"];
   //print($arr);
   //$index++;
@@ -425,7 +453,7 @@ input[type=submit]:hover {
   $p= $arr["$index"];
   $res= $_SESSION["res"];
   //print(count($res));
-?>  
+?>
 
 
 
@@ -441,7 +469,7 @@ input[type=submit]:hover {
         echo ' &nbsp;<h3 class="center">Question .'.$count.': '.$row['ques'].'</h3>';
         ?>
         &nbsp;&nbsp;&nbsp;<img id="myImg" src="../faculty_pages/upload/<?php echo $row["image"];?>" height="200px" width="200px" alt="No image for this question"/>
-        
+
     <br><br>
     <div id="myModal" class="modal">
 
@@ -455,7 +483,7 @@ input[type=submit]:hover {
 <div id="caption"></div>
 </div>
     <?php
-    
+
            if($row["image"])
            {
            echo '<h4>(Click on the image to zoom)</h4>';
@@ -463,9 +491,9 @@ input[type=submit]:hover {
 
 echo'<textarea cols="100" rows="12" placeholder="Enter text here" name="textAreaAns" onCopy="return false" onPaste="return false" onCut="return false"></textarea><br>';
 
-echo '<input name="sub" type="submit" id="sub" class="btn btn-primary" value="Submit" class="btn btn-primary"/>';    
+echo '<input name="sub" type="submit" id="sub" class="btn btn-primary" value="Submit" class="btn btn-primary"/>';
       }
-  ?>  
+  ?>
 </form>
 <?php
 if(isset($_POST["sub"]))
@@ -480,9 +508,11 @@ if(isset($_POST["sub"]))
     $ans= $_POST['textAreaAns'];
    //  array_push($res,$ans);
    $res[$p][0]= $ans;
+   $res[$p][1]=$_SESSION["picture"];
     $_SESSION["res"]=$res;
     //print(count($res));
     //print($res[0]);
+
   if($_SESSION["index"]>=$tot)
   {
 //     echo "<script>alert('Response has been recorded.')</script>";
@@ -492,6 +522,7 @@ if(isset($_POST["sub"]))
   else
   {
 //   echo "<script>alert('Response has been recorded.')</script>";
+
          echo "<script>window.location.href='takeSubjectiveTest.php'</script>";
   }
 }
@@ -501,12 +532,12 @@ if(isset($_POST["sub"]))
 </fieldset>
 </div>
 </div>
-<script>
+<!-- <script>
 $(window).blur(function() {
    alert('You are not allowed to leave page.');
    //do something else
 });
-</script>
+</script> -->
 <script>
 var modal = document.getElementById("myModal");
 
@@ -530,13 +561,10 @@ span.onclick = function() {
 </script>
 
 
-</div> 
+</div>
     <?php
 include('../footer.php');
 ?>
 </body>
 </html>
 
-<!--   //echo count($arr);
-  //echo '<h1>'.$index.'</h1>';
-  //echo '<h1>'.$tot.'</h1>'; -->
