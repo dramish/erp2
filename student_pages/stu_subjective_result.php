@@ -23,7 +23,7 @@ window.onunload=function(){null};
         </script>
 <script>
 document.onkeydown = function(e) {
-        if ((e.ctrlKey && 
+        if ((e.ctrlKey &&
             (e.keyCode === 67 || //c
              e.keyCode === 86 || //v
              e.keyCode === 85 || //u
@@ -66,7 +66,7 @@ body {
   position: relative;
   padding: 20px;
   background: white;
-  color: #21610B;  
+  color: #21610B;
   font-size: 15px;
 }
 p{
@@ -213,7 +213,7 @@ input[type=button]:hover {
   <img src="IGDTUW-logo.png" alt="logo" />
   <h1>INDIRA GANDHI DELHI TECHNICAL UNIVERSITY FOR WOMEN</h1>
   <p>(Established by Govt. of Delhi vide Act 9 of 2012)</p>
-</div> 
+</div>
 <div class="navbar" id="myTopnav">
     <a class="active" href="module_page.php"><i class="fa fa-file-text" aria-hidden="true"></i> Module</a>
         <a href="learning_homepage.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
@@ -249,14 +249,14 @@ function myFunction() {
   </tr>
  <?php
    $sno=1;
-   $res= $_SESSION["res"]; 
+   $res= $_SESSION["res"];
    $E=$_SESSION['Email'];
    //print_r($res);
    // echo '<h1>'.$res[12345][0].'</h1>';
    // echo $res[1115461][1];
    // echo $res[1115461][2];
     //this is the 2D array in which all the responses are stored....key:quesid and value:response enter by user.
-  // echo $res[1892603][0];  (hardcoded value)   //this element will be null if this question was unattempted. otherwise optionid will be returned 
+  // echo $res[1892603][0];  (hardcoded value)   //this element will be null if this question was unattempted. otherwise optionid will be returned
    //echo $res[1][0];
    //echo $res[2][0];
  // echo count($res);              //this will return the size of the array.
@@ -267,6 +267,8 @@ function myFunction() {
   $response; //individual ques response
   $response1="";
   $indiQues=""; //student responses
+  $pic="";
+  $pic1="";
     $sql=mysqli_query($con,"SELECT q.qid,q.ques FROM subjective_ques AS q WHERE quizid='$testid' ") or die('Error101');
     while($row=mysqli_fetch_array($sql)){
           $qid=$row['qid'];
@@ -274,16 +276,18 @@ function myFunction() {
           $stu_opid=$res[$qid][0];
           $indiQues=$indiQues."$ques`";
           $response1=$response1."$stu_opid@";
-          
+          $pic=$pic.$res[$qid][1]."#";
+
           echo '<tr><td>'.$sno++.'</td><td>'.$ques.'</td><td>'.$res[$qid][0].'</td></tr>';
         }
         echo '</table></div>';
-        //calculate score 
+        //calculate score
+
         $date=date('d-m-Y');
         $c=$_SESSION['Correct'];
         ?>
         <table align="center">
-        <?php 
+        <?php
   $que= mysqli_query($con, "SELECT * FROM subjective_history where email='$E' and quizid='$testid'");
       if($data=mysqli_fetch_array($que))
         {
@@ -292,7 +296,7 @@ function myFunction() {
         }
         else
         {
-             $ins_res=mysqli_query($con,"INSERT INTO subjective_history (email, quizid, date, stud_ans, indiQues) VALUES ('$E','$testid','$date','$response1', '$indiQues' )") or die(Error);
+             $ins_res=mysqli_query($con,"INSERT INTO subjective_history (email, quizid, date, stud_ans, indiQues, image) VALUES ('$E','$testid','$date','$response1', '$indiQues','$pic' )") or die(Error);
 
         }
     ?>
@@ -309,7 +313,7 @@ echo '<a href="subjective_test_feedback.php?tid='.$testid.'"><input type="button
 </div>
 <br>
 <br>
-</div> 
+</div>
     <?php
 include('../footer.php');
 ?>
