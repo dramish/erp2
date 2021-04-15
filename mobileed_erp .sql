@@ -47,6 +47,15 @@ INSERT INTO `admin` (`admin_id`, `email`, `password`) VALUES
 -- Table structure for table `answer`
 --
 
+CREATE TABLE `attendance_trial` (
+  `aid` int(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `student_email` varchar(50) NOT NULL,
+  `tid` int(11) NOT NULL,
+  `date` varchar(10) NOT NULL,
+  `time` varchar(30) NOT NULL,
+  `attend` int(5) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE `answer` (
   `qid` int(255) NOT NULL,
   `ansid` int(255) NOT NULL
