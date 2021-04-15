@@ -219,7 +219,7 @@ th {
   <p>(Established by Govt. of Delhi vide Act 9 of 2012)</p>
 </div>
 
-  <div class="navbar">
+<div class="navbar">
     <a href="module_page.php"><i class="fa fa-file-text" aria-hidden="true"></i> Module</a>
     <a href="module_page.php"><i class="fa fa-user  fa-home"></i> Home</a>      
 <!--     <a href="student_video_conf.php"><i class="fa fa-download" aria-hidden="true"></i> Attend Class</a>  -->
@@ -230,6 +230,7 @@ th {
     <a href="student_timetable.php"><i class="fa fa-files-o" aria-hidden="true"></i>Class Timetable</a>
     
   </div>
+
       <script>
 function myFunction() {
   var x = document.getElementById("myTopnav");
