@@ -249,12 +249,13 @@ input[type=submit] {
   <h1>INDIRA GANDHI DELHI TECHNICAL UNIVERSITY FOR WOMEN</h1>
   <p>(Established by Govt. of Delhi vide Act 9 of 2012)</p>
 </div>
-<div class="navbar" id="myTopnav">
-        <a class="active" href="fac_home.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
-        <a href="manageuser.php"><i class="fa fa-users" aria-hidden="true"></i> Manage User</a>
-        <a href="add_quiz.php"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Quiz</a>
-        <a href="viewtest.php"><i class="fa fa-eye" aria-hidden="true"></i> View Test</a>
-        <a href="f_testresult.php"><i class="fa fa-address-card-o" aria-hidden="true"></i> View Result</a>
+    <div class="navbar" id="myTopnav">
+    <a class="active" href="fac_module.php"><i class="fa fa-file-text" aria-hidden="true"></i> Module</a>
+        <a href="fac_teaching_home.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+        <a href="add_subjective.php"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Subjective Quiz</a>
+        <a href="view_subjective_tests.php"><i class="fa fa-eye" aria-hidden="true"></i> View Subjective Test</a>
+        <a href="f_subjectivetestresult.php"><i class="fa fa-address-card-o" aria-hidden="true"></i> View Subjective Result</a>
+
         <a href="f_logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
