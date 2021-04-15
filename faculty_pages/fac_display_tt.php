@@ -154,15 +154,16 @@ font-size:25px;
     <h1>INDIRA GANDHI DELHI TECHNICAL UNIVERSITY FOR WOMEN</h1>
     <p>(Established by Govt. of Delhi vide Act 9 of 2012)</p>
   </div>
-
-
-  <div class="navbar">
+       
+         <div class="navbar">
     <a href="fac_module.php"><i class="fa fa-file-text" aria-hidden="true"></i> Module</a>
-    <a href="fac_classroom_page.php"><i class="fa fa-user  fa-home"></i> Home</a>
+    <a href="fac_module.php"><i class="fa fa-user  fa-home"></i> Home</a>
     <a href="<?php echo $meet_url ?>" target="_blank"><i class="fa fa-upload"></i> Initiate class </a>
-    <a href="fac_view_attendance.php"><i class="fa fa-eye" aria-hidden="true"></i> View Attendance</a>
+<!--     <a href="fac_view_attendance.php"><i class="fa fa-eye" aria-hidden="true"></i> View Attendance</a> -->
+        <a href="fac_batch.php"><i class="fa fa-eye" aria-hidden="true"></i> View Attendance</a>
+
     <a href="fac_resources.php"><i class="fa fa-upload" aria-hidden="true"></i> Resources Center </a>
-    <a href="fac_display_tt.php"><i class="fa fa-upload" aria-hidden="true"></i> View timetable</a>
+    <a href="fac_display_tt.php"><i class="fa fa-upload" aria-hidden="true"></i>View Timetable</a>
     <a href="fac_edit_tt.php"><i class="fa fa-upload" aria-hidden="true"></i>Edit timetable</a>
   </div>
 
